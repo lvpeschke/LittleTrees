@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * A LinkedRBinaryTree is a binary tree implemented as a linked structure
  * using RPositions. It knows its size and has a reference to its root.
  * 
- * @author Group 10
+ * @author Group 10 : Guillaume Moyson and Lena Peschke
  * @version October 2013
  * 
  * @param <E>

@@ -3,7 +3,7 @@
  * A RPosition tree possesses an element <E> and 2 subtrees,
  * right and left, also RPositions.
  * 
- * @author Group 10
+ * @author Group 10 : Guillaume Moyson and Lena Peschke
  * @version October 2013
  * 
  * @param <E>
