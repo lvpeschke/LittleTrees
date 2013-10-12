@@ -3,7 +3,8 @@
  *
  * This interface uses the Position interface described in DSAJ-4.
  * 
- * @author SINF1121
+ * @author Michal T. Goodrich
+ * @author Robert Tamassia
  */
 public interface RBinaryTree<E> {
   /**

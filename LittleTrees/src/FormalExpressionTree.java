@@ -12,6 +12,7 @@
  * Un CONSTRUCTEUR sans argument permet de construire un arbre elementaire
  * correspondant a l'expression vide "".
  *
+ * @author SINF1121 (fourni)
  */ 
 
 public interface FormalExpressionTree {
