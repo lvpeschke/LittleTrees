@@ -1,6 +1,5 @@
 /**
  * Runtime exception thrown if the expression contained in the tree is invalid.
- * Such an expression can be : TODO
  * 
  * @author Group 10 : Lena Peschke
  * @version October 2013

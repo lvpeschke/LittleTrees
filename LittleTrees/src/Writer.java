@@ -61,7 +61,7 @@ public class Writer {
 	}
 	
 	/**
-	   * Methode permettant d'ecrire dans un fichier de sortie pas encore ouvert et de refermer celui-ci juste apr��s
+	   * Methode permettant d'ecrire dans un fichier de sortie pas encore ouvert et de refermer celui-ci juste apres
 	   *  
 	   * @pre  -
 	   * @post Ouverture du fichier de sortie. Ecriture du String passe en argument dans le fichier de sortie.
