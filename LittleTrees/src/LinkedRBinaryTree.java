@@ -114,8 +114,10 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	 * @throws EmptyTreeException if root is null
 	 */
 	public void setElement(E o) {
-		if (this.isEmpty())
-			throw new EmptyTreeException("Empty tree: no element to be set");
+		if (this.isEmpty()) {
+			root = new RPosition<E>(); 
+			size = 1;
+		}
 		this.root.setElement(o);
 	}
 
@@ -126,7 +128,9 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	public void setLeft(RBinaryTree<E> tree) {
 		if (this.isEmpty())
 			throw new EmptyTreeException("Empty tree: no left element to be set");
-		this.size += tree.size()-this.root.getLeft().size();
+
+		if(this.root.getLeft()==null) this.size += tree.size();
+		else this.size += tree.size()-this.root.getLeft().size();
 		this.root.setLeft((RPosition<E>) tree.root());
 	}
 
@@ -137,7 +141,9 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	public void setRight(RBinaryTree<E> tree) {
 		if (this.isEmpty())
 			throw new EmptyTreeException("Empty tree: no right element to be set");
-		this.size += tree.size()-this.root.getRight().size();
+
+		if(this.root.getRight()==null) this.size += tree.size();
+		else this.size += tree.size()-this.root.getRight().size();
 		this.root.setRight((RPosition<E>) tree.root());
 	}
 
