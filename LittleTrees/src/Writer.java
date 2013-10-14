@@ -32,7 +32,7 @@ public class Writer {
 	   * Méthode permettant d'écrire dans le fichier de sortie déjà ouvert
 	   *  
 	   * @pre  Le fichier de sortie "output" doit déjà avoir été ouvert préalablement
-	   * @post Ecris dans un fichier de sortie
+	   * @post Ecrit dans un fichier de sortie
 	   * @exception IOException si erreur lors de l'écriture dans le fichier
 	   * 
 	   */ 
