@@ -230,6 +230,18 @@ public class RFormalExpressionTree implements FormalExpressionTree {
 				NewTree.setRight(rightT);
 				return new RFormalExpressionTree(NewTree);
 				break;
+			
+			case "cos" :
+				LinkedRBinaryTree<?> LT = this.tree;
+				LT.setElement(dLeftdx.tree);
+				LinkedRBinaryTree<?> RT = this.tree;
+				RT.setElement("sin");
+				RT.setLeft(this.tree);
+				RT.setRight(null);
+				NewTree.setElement("*");
+				NewTree.setLeft(LT);
+				NewTree.setRight(RT);
+				return new RFormalExpressionTree(NewTree);
 			}
 		}
 		
