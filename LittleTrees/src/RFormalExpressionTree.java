@@ -136,10 +136,91 @@ public class RFormalExpressionTree implements FormalExpressionTree {
 	}
 
 	@Override
-	public FormalExpressionTree derive() {
-		//TODO Depend de l'implementation des expression
-		// derivation.derive(tree.root());
-		return null;
+	public RFormalExpressionTree derive() {
+		if(this.tree.isEmpty())
+			return null;
+		
+		String rootElem = ""+this.tree.root().element();
+		if(this.tree.isLeaf()) {
+			// x'=1
+			if(rootElem == "x")
+				return new RFormalExpressionTree("1");
+			// la derivee d'une constante est nulle
+			else
+				return new RFormalExpressionTree("0");
+		}
+		else {
+			// resultat de la derivation (variable modifiee dans la suite du code)
+			LinkedRBinaryTree<?> NewTree = this.tree;
+			// derivee du sous-arbre de gauche
+			RFormalExpressionTree dLeftdx = (new RFormalExpressionTree(this.tree.leftTree())).derive();
+			// derivee du sous-arbre de droite
+			RFormalExpressionTree dRightdx = (new RFormalExpressionTree(this.tree.rightTree())).derive();
+			
+			switch(rootElem) {
+			case "+" :
+				NewTree.setLeft(dLeftdx.tree);
+				NewTree.setRight(dRightdx.tree);
+				return new RFormalExpressionTree(NewTree);
+				break;
+			
+			case "-" :
+				NewTree.setLeft(dLeftdx.tree);
+				NewTree.setRight(dRightdx.tree);
+				return new RFormalExpressionTree(NewTree);
+				break;
+			
+			case "*" :
+				// LeftT = (derivee de l'arbre de gauche)*(arbre de droite)
+				LinkedRBinaryTree<?> LeftT = this.tree;
+				LeftT.setLeft(dLeftdx.tree);
+				// RightT = (arbre de gauche)*(derivee de l'arbre de droite)
+				LinkedRBinaryTree<?> RightT = this.tree;
+				RightT.setRight(dRightdx.tree);
+				
+				NewTree.setElement("+");
+				NewTree.setLeft(LeftT);
+				NewTree.setRight(RightT);
+				return new RFormalExpressionTree(NewTree);
+				break;
+			
+			case "/" :
+				// NumT = arbre representant le numerateur dans la formule (f/g)'=(f'g-fg')/g². C'est-a-dire f'g-fg'
+				LinkedRBinaryTree<?> NumT = this.tree;
+				// NumLeftT = arbre representant le terme de gauche dans l'expression du numerateur. C'est-a-dire f'g
+				LinkedRBinaryTree<?> NumLeftT = this.tree;
+				NumLeftT.setElement("*");
+				NumLeftT.setLeft(dLeftdx.tree);
+				// NumRightT = arbre representant le terme de droite dans l'expression du numerateur. C'est-a-dire fg'
+				LinkedRBinaryTree<?> NumRightT = this.tree;
+				NumRightT.setElement("*");
+				NumRightT.setRight(dRightdx.tree);
+				
+				NumT.setElement("-");
+				NumT.setLeft(NumLeftT);
+				NumT.setRight(NumRightT);
+				
+				// DenT = arbre representant le denominateur dans la formule (f/g)'=(f'g-fg')/g². C'est-a-dire g²=g*g
+				LinkedRBinaryTree<?> DenT = this.tree;
+				DenT.setElement("^");
+				// leaf2 = arbre composé d'un 2 et de deux sous-arbres egaux a null
+				RPosition Elem2 = new RPosition();
+				Elem2.setElement("2");
+				LinkedRBinaryTree<?> leaf2 = new LinkedRBinaryTree(1,Elem2);
+				
+				// le sous-arbre gauche de DenT represente l'expression g (dans g^2).
+				// Il s'agit donc bien du sous-arbre droit de l'arbre courant puisqu'on derive f/g et pas g/f.
+				DenT.setLeft(this.tree.rightTree());
+				DenT.setRight(leaf2);
+				
+				NewTree.setLeft(NumT);
+				NewTree.setRight(DenT);
+				return new RFormalExpressionTree(NewTree);
+				break;
+			}
+		}
+		
+		return result;
 	}
 	/*
 	public static void main(String[] args) {
