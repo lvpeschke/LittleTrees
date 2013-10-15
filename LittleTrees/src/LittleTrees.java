@@ -16,7 +16,7 @@ public static void main(String[] args){
 // create an empty array list with an initial capacity
 ArrayList<String> aList = new ArrayList<String>(10);
 
-//Initializes the variable path to the input file.
+//Initializes a string variable that stores the input file's path
 String chemin = "C:\\workplace\\Mission2\\inputFile.txt";
 
 //Initializes a string variable that stores the output file's name
@@ -30,7 +30,7 @@ String fichierSortie = "outputFile.txt";
 String result;
 
 /**
- *Creates instances of MyReader, Writer classes
+ *Creates instances of MyReader and Writer classes
  * */
 	
 MyReader mainReader = new MyReader(chemin);
