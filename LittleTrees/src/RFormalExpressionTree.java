@@ -242,6 +242,33 @@ public class RFormalExpressionTree implements FormalExpressionTree {
 				NewTree.setLeft(LT);
 				NewTree.setRight(RT);
 				return new RFormalExpressionTree(NewTree);
+				break;
+				
+			case "^" :
+				LinkedRBinaryTree<?> lt = this.tree;
+				lt.setElement(dLeftdx.tree);
+				LinkedRBinaryTree<?> rt = this.tree;
+				rt.setElement(dRightdx.tree);
+				//sous-arbre "-"
+				LinkedRBinaryTree<?> minus = new LinkedRBinaryTree<>();
+				minus.setElement("-");
+				minus.setLeft(dRightdx.tree);
+				minus.setRight("1");
+				//sous-arbre "^"
+				LinkedRBinaryTree<?> exp = new LinkedRBinaryTree<>();
+				minus.setElement("^");
+				minus.setLeft(this.tree);
+				minus.setRight(minus);
+				//sous-arbre "*"
+				LinkedRBinaryTree<?> times = new LinkedRBinaryTree<>();
+				minus.setElement("*");
+				minus.setLeft(exp);
+				minus.setRight(dLeftdx.tree);
+				//arbre complet
+				NewTree.setElement("*");
+				NewTree.setLeft(dRightdx.tree);
+				NewTree.setRight(times);
+				return new RFormalExpressionTree(NewTree);
 			}
 		}
 		
